@@ -26,8 +26,17 @@ public class TodoServiceImpl implements TodoService {
 		todo.setDeleted(todoDto.isDeleted());
 		
 		//Todo Jpa entity
+		Todo saveTodo = todoRepository.save(todo);
 		
-		return null;
+		//convert savedTodo JPA Entity into TodoDto object
+		TodoDto savedTodoDto = new TodoDto();
+		savedTodoDto.setId(saveTodo.getId());
+		savedTodoDto.setTitle(saveTodo.getTitle());
+		savedTodoDto.setDescription(saveTodo.getDescription());
+		savedTodoDto.setCompleted(saveTodo.isCompleted());
+		savedTodoDto.setDeleted(saveTodo.isDeleted());
+		
+		return savedTodoDto;
 	}
 
 }
